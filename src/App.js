@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Layout } from "antd";
+import AppContent from "./components/AppContent";
+import AppSidebar from "./components/AppSidebar";
+import AppNavbar from "./components/AppNavbar";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [sidebarColor, setSidebarColor] = useState("");
+  const changeSidebarColor = (color) => setSidebarColor(color);
+  const [NavbarColor, setNavbarColor] = useState("");
+  const changeNavbarColor = (color) => setNavbarColor(color);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AppNavbar changeNavbarColor={NavbarColor} />
+      <Layout>
+        <AppSidebar changeSidebarColor={sidebarColor} />
+        <Layout>
+          <AppContent
+            changeSidebarColor={changeSidebarColor}
+            changeNavbarColor={changeNavbarColor}
+          />
+        </Layout>
+      </Layout>
     </div>
   );
-}
+};
 
 export default App;
